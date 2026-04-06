@@ -11,6 +11,7 @@
 //   node src/calculator.js + 1 2
 //   node src/calculator.js mul 3 4
 
+const calc = require('./lib/calculator');
 const [, , op, aRaw, bRaw] = process.argv;
 
 function printUsage() {
@@ -30,36 +31,33 @@ if (Number.isNaN(a) || Number.isNaN(b)) {
   process.exit(1);
 }
 
-function isDivisionOperator(o) {
-  return o === '/' || o === '÷' || o.toLowerCase() === 'div';
-}
-
 let result;
 switch (op) {
   case '+':
   case 'add':
-    result = a + b;
+    result = calc.add(a, b);
     break;
   case '-':
   case 'sub':
   case 'subtract':
-    result = a - b;
+    result = calc.sub(a, b);
     break;
   case '*':
   case 'x':
   case 'X':
   case 'mul':
   case 'times':
-    result = a * b;
+    result = calc.mul(a, b);
     break;
   case '/':
   case '÷':
   case 'div':
-    if (b === 0) {
+    try {
+      result = calc.div(a, b);
+    } catch (e) {
       console.error('Error: division by zero');
       process.exit(1);
     }
-    result = a / b;
     break;
   default:
     console.error('Error: unknown operation:', op);
