@@ -26,3 +26,56 @@ describe('calculator basic operations', () => {
     expect(calc.mul(0.5, 2)).toBeCloseTo(1);
   });
 });
+
+describe('calculator extended operations', () => {
+  // modulo
+  test('5 % 2 = 1', () => {
+    expect(calc.modulo(5, 2)).toBe(1);
+  });
+
+  test('10 % 3 = 1', () => {
+    expect(calc.modulo(10, 3)).toBe(1);
+  });
+
+  test('modulo with negative dividend', () => {
+    expect(calc.modulo(-7, 3)).toBe(-1);
+  });
+
+  test('modulo with zero dividend', () => {
+    expect(calc.modulo(0, 5)).toBe(0);
+  });
+
+  // power
+  test('2 ^ 3 = 8', () => {
+    expect(calc.power(2, 3)).toBe(8);
+  });
+
+  test('5 ^ 0 = 1', () => {
+    expect(calc.power(5, 0)).toBe(1);
+  });
+
+  test('2 ^ -1 = 0.5', () => {
+    expect(calc.power(2, -1)).toBeCloseTo(0.5);
+  });
+
+  test('negative base with even exponent is positive', () => {
+    expect(calc.power(-2, 2)).toBe(4);
+  });
+
+  // square root
+  test('√16 = 4', () => {
+    expect(calc.squareRoot(16)).toBe(4);
+  });
+
+  test('√0 = 0', () => {
+    expect(calc.squareRoot(0)).toBe(0);
+  });
+
+  test('√2 is approximately 1.414', () => {
+    expect(calc.squareRoot(2)).toBeCloseTo(1.414, 3);
+  });
+
+  test('square root of negative number throws', () => {
+    expect(() => calc.squareRoot(-1)).toThrow('Cannot take square root of negative number');
+  });
+});
